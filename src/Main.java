@@ -30,6 +30,30 @@ public class Main {
 				public void onMessage(Friend friend, String message) {
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
+					
+	            	if(message.equals("ob")) { //our blue
+	            		friend.sendMessage("Our Blue Buff Killed");
+	            		Timer timer = new Timer();
+	            		timer.scheduleAtFixedRate(new BuffTimer(friend,"Blue", 10), 0, 5*1000);
+	            	}
+					
+	            	if(message.equals("or")) { //our red
+	            		friend.sendMessage("Our Red Buff Killed");
+	            	}
+	            	if(message.equals("tb")) { //their blue
+	            		friend.sendMessage("Their Blue Buff Killed");
+	            	}
+	            	if(message.equals("tr")) { //their red
+	            		friend.sendMessage("Their Red Buff Killed");
+	            	}
+	            	if(message.equals("drag")) { //dragon
+	            		friend.sendMessage("Dragon Killed");
+	            		Timer timer = new Timer();
+	            		timer.scheduleAtFixedRate(new BuffTimer(friend,"Dragon", 360), 0, 5*1000);
+	            	}
+	            	if(message.equals("baron")) { //our red
+	            		friend.sendMessage("Baron Killed");
+	            	}
 					if(message.equals("disconnect")) {
 						discon = true;
 					}
@@ -38,9 +62,7 @@ public class Main {
 				}
 			});
 		    
-		    if(discon) {
-		    	api.disconnect();
-		    }
+//			api.disconnect();
 		    
 		    // Example 2: Send Chat Message to all your friends and wait for an response
 //		    for (Friend f : api.getFriends()) {

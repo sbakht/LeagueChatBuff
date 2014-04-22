@@ -21,9 +21,9 @@ public class BuffTimer extends TimerTask {
 		System.out.println("In " + name + " Timer");
 		friend.sendMessage(name + " will spawn sometime in " + timeLeft +  " seconds");
 		timeLeft -= 5;
-//		if(timeLeft == 0) {
-//			this.cancel();
-//		}
+		if(timeLeft == 0) {
+			this.cancel();
+		}
 	}
 	
 }
