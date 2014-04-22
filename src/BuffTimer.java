@@ -5,10 +5,12 @@ import com.github.theholywaffle.lolchatapi.wrapper.Friend;
 public class BuffTimer extends TimerTask {
 
 	private Friend friend;
+	private String name;
 	static private int timeLeft = 300;
 	
-	public BuffTimer(Friend friend) {
+	public BuffTimer(Friend friend, String name) {
 		this.friend = friend;
+		this.name = name;
 	}
 	
 	@Override
