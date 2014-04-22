@@ -8,6 +8,7 @@ import com.github.theholywaffle.lolchatapi.wrapper.Friend;
 
 public class Main {
 	
+	static private boolean discon;
 	
 	public static void main(String args[]) {
 
@@ -20,10 +21,27 @@ public class Main {
 		        e.printStackTrace();
 		    }
 		    
-		    System.out.println(api.getFriendByName("iwanthotdogs"));
-		    System.out.println(api.getFriendByName("iwanthotdogs").getName());
+//		    System.out.println(api.getFriendByName("iwanthotdogs"));
+//		    System.out.println(api.getFriendByName("iwanthotdogs").getName());
 		    
-		    api.disconnect();
+		    //Example 2: Adding ChatListener - listens to chat messages from any of your friends.
+			api.addChatListener(new ChatListener() {
+
+				public void onMessage(Friend friend, String message) {
+					message = (String) message.trim();
+					System.out.println("[All]>" + friend.getName() + ": " + message);
+					if(message.equals("disconnect")) {
+						discon = true;
+					}
+					System.out.println(discon);
+
+				}
+			});
+		    
+		    if(discon) {
+		    	api.disconnect();
+		    }
+		    
 		    // Example 2: Send Chat Message to all your friends and wait for an response
 //		    for (Friend f : api.getFriends()) {
 //		    	f.sendMessage("hi");
