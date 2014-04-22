@@ -13,7 +13,7 @@ public class Main {
 	
 	public static void main(String args[]) {
 
-		LolChat api = new LolChat(ChatServer.NA, false);
+		LolChat api = new LolChat(ChatServer.NA, true);
 		
 		if (api.login("sealsmurf1", "sealsmurf2")) {
 
