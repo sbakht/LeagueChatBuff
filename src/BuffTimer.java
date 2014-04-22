@@ -18,7 +18,7 @@ public class BuffTimer extends TimerTask {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		if(timeLeft == 0) {
+		if(timeLeft <= 0) {
 			for(Friend f : timerFriends) {
 				f.sendMessage(name + " has spawned");
 			}
@@ -28,7 +28,7 @@ public class BuffTimer extends TimerTask {
 		for(Friend f : timerFriends) {
 			f.sendMessage(name + " will spawn sometime in " + timeLeft +  " seconds");
 		}
-		timeLeft -= 5;
+		timeLeft -= 60;
 	}
 	
 }
