@@ -36,7 +36,8 @@ public class Main {
 		            	if(message.equals("ob")) { //our blue
 		            		friend.sendMessage("Our Blue Buff Killed");
 		            		Timer timer = new Timer();
-		            		timer.schedule(new BuffTimer(friend), 5*1000);
+//		            		timer.schedule(new BuffTimer(friend), 5*1000);
+		            		timer.scheduleAtFixedRate(new BuffTimer(friend), 0, 5*1000);
 		            	}
 		            	if(message.equals("or")) { //our red
 		            		friend.sendMessage("Our Red Buff Killed");
