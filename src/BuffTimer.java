@@ -1,16 +1,16 @@
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 import com.github.theholywaffle.lolchatapi.wrapper.Friend;
 
 public class BuffTimer extends TimerTask {
 
-	private Friend friend;
+	private ArrayList<Friend> timerFriends;
 	private String name;
-//	static private int timeLeft = 300;
 	private int timeLeft;
 	
-	public BuffTimer(Friend friend, String name, int timeLeft) {
-		this.friend = friend;
+	public BuffTimer(ArrayList<Friend> timerFriends, String name, int timeLeft) {
+		this.timerFriends = timerFriends;
 		this.name = name;
 		this.timeLeft = timeLeft;
 	}
@@ -18,13 +18,17 @@ public class BuffTimer extends TimerTask {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		System.out.println("In " + name + " Timer");
-		friend.sendMessage(name + " will spawn sometime in " + timeLeft +  " seconds");
-		timeLeft -= 5;
 		if(timeLeft == 0) {
-			friend.sendMessage(name + " has respawned");
+			for(Friend f : timerFriends) {
+				f.sendMessage(name + " has spawned");
+			}
 			this.cancel();
+			return;
 		}
+		for(Friend f : timerFriends) {
+			f.sendMessage(name + " will spawn sometime in " + timeLeft +  " seconds");
+		}
+		timeLeft -= 5;
 	}
 	
 }
