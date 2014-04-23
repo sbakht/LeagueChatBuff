@@ -26,7 +26,7 @@ public class BuffTimer extends TimerTask {
 			return;
 		}
 		for(Friend f : timerFriends) {
-			f.sendMessage(name + " will spawn sometime in " + timeLeft +  " seconds");
+			f.sendMessage(name + " spawn " + timeLeft/60 +  " minutes");
 		}
 		timeLeft -= 60;
 	}
