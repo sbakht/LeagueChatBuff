@@ -70,16 +70,8 @@ public class Friend extends Wrapper<RosterEntry> {
 	}
 	
 	public void resetTimer(String buff) {
-		switch (buff) {
-			case "ob":
-				timers.get("ob").cancel();
-				timers.put("ob",new Timer());
-				break;
-			case "or":
-				timers.get("or").cancel();
-				timers.put("or",new Timer());
-				break;
-		}
+		timers.get(buff).cancel();
+		timers.put(buff,new Timer());
 	}
 	
 	/**
