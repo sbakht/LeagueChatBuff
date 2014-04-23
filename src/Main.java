@@ -59,13 +59,13 @@ public class Main {
 					Timer timer = new Timer();
 					if(objectives.containsKey(message)){
 						if(message.equals("ob")) {
-							friend.resetOB();
+							friend.resetTimer("ob");
 							friend.obTimer().scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
 						}else if(message.equals("or")){
-							friend.resetOR();
-							friend.obTimer().scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 5*1000);
+							friend.resetTimer("or");
+							friend.orTimer().scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
 						}else{
-							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 						}
 					}
 					

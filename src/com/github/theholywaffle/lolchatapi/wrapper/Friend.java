@@ -69,6 +69,19 @@ public class Friend extends Wrapper<RosterEntry> {
 		timers.put("or",new Timer());
 	}
 	
+	public void resetTimer(String buff) {
+		switch (buff) {
+			case "ob":
+				timers.get("ob").cancel();
+				timers.put("ob",new Timer());
+				break;
+			case "or":
+				timers.get("or").cancel();
+				timers.put("or",new Timer());
+				break;
+		}
+	}
+	
 	/**
 	 * Deletes this friend.
 	 * 
