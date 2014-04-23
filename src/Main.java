@@ -60,8 +60,12 @@ public class Main {
 						case "baron":
 							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420), 0, 60*1000);
 							break;
-					
 					}
+					
+					if(message.contains("flash")) {
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 300), 0, 60*1000);
+					}
+					
 					if(message.equals("disconnect")) {
 						discon = true;
 					}
