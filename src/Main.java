@@ -66,6 +66,14 @@ public class Main {
 						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 300), 0, 60*1000);
 					}
 					
+					if(message.contains("ignite") || message.contains("exhaust")) { //Not full minute - needs fixing
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 210), 0, 60*1000);
+					}
+					
+					if(message.contains("heal")) {
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 240), 0, 60*1000);
+					}
+					
 					if(message.equals("disconnect")) {
 						discon = true;
 					}
