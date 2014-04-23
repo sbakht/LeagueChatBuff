@@ -11,7 +11,7 @@
 package com.github.theholywaffle.lolchatapi.wrapper;
 
 import java.io.IOException;
-
+import java.util.Hashtable;
 import java.util.Timer;
 
 import org.jdom2.JDOMException;
@@ -34,19 +34,39 @@ public class Friend extends Wrapper<RosterEntry> {
 	private Friend instance = null;
 	private Chat chat = null;
 	private ChatListener listener = null;
+	private Hashtable<String, Timer> timers = new Hashtable<String, Timer>();
 	private Timer obTimer = new Timer();
+	private Timer orTimer = new Timer();
 	
 	public Friend(LolChat api, XMPPConnection connection, RosterEntry entry) {
 		super(api, connection, entry);
 		this.instance = this;
+		timers.put("ob", new Timer());
+		timers.put("or", new Timer());
+		timers.put("tb", new Timer());
+		timers.put("tr", new Timer());
+		timers.put("drag", new Timer());
+		timers.put("baron", new Timer());
 	}
 
 	public Timer obTimer() {
-		return obTimer;
+		return timers.get("ob");
 	}
 	
-	public void createTimer() {
-		obTimer = new Timer();
+	public Timer orTimer() {
+		return timers.get("or");
+	}
+	
+	public void resetOB() {
+		timers.get("ob").cancel();
+		timers.put("ob",new Timer());
+	}
+	
+	public void resetOR() {
+//		orTimer.cancel();
+//		orTimer = new Timer();
+		timers.get("or").cancel();
+		timers.put("or",new Timer());
 	}
 	
 	/**
