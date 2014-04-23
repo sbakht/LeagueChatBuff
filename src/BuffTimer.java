@@ -20,7 +20,11 @@ public class BuffTimer extends TimerTask {
 		// TODO Auto-generated method stub
 		if(timeLeft <= 0) {
 			for(Friend f : timerFriends) {
-				f.sendMessage(name + " has spawned");
+				if(name.contains("flash") || name.contains("ignite") || name.contains("exhaust") || name.contains("heal") || name.contains("ghost") ) {
+					f.sendMessage(name + " is up");
+				}else{
+					f.sendMessage(name + " has spawned");
+				}
 			}
 			this.cancel();
 			return;
