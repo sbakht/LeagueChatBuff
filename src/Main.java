@@ -39,31 +39,29 @@ public class Main {
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
 					
-	            	if(message.equals("ob")) { //our blue
-	            		Timer timer = new Timer();
-	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BLUE", 300), 0, 60*1000);
-	            	}
+					Timer timer = new Timer();
+					switch (message) {
+
+						case "ob":
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BLUE", 300), 0, 60*1000);
+							break;
+						case "or":
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"RED", 300), 0, 60*1000);
+							break;
+						case "tb":
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMEY BLUE", 300), 0, 60*1000);
+							break;
+						case "tr":
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMY RED", 300), 0, 60*1000);
+							break;
+						case "drag":
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"DRAGON", 360), 0, 60*1000);
+							break;
+						case "baron":
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420), 0, 60*1000);
+							break;
 					
-	            	if(message.equals("or")) { //our red
-	            		Timer timer = new Timer();
-	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"RED", 300), 0, 60*1000);
-            		}
-	            	if(message.equals("tb")) { //their blue
-	            		Timer timer = new Timer();
-	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMEY BLUE", 300), 0, 60*1000);
-	            	}
-	            	if(message.equals("tr")) { //their red
-	            		Timer timer = new Timer();
-	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMY RED", 300), 0, 60*1000);
-	            	}
-	            	if(message.equals("drag")) { //dragon
-	            		Timer timer = new Timer();
-	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"DRAGON", 360), 0, 60*1000);
-	            	}
-	            	if(message.equals("baron")) { //baron
-	            		Timer timer = new Timer();
-	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420), 0, 60*1000);
-	            	}
+					}
 					if(message.equals("disconnect")) {
 						discon = true;
 					}
@@ -71,8 +69,8 @@ public class Main {
 
 				}
 			});
-		    
-//			api.disconnect();
+		  
+//		    api.disconnect();
 		    
 		}
 	}
