@@ -11,12 +11,13 @@ public class BuffTimer extends TimerTask {
 	private String willSpawn;
 	private String spawned;
 	private Boolean isBuff;
+	 
 	
-	public BuffTimer(ArrayList<Friend> timerFriends, String name, int timeLeft, Boolean isBuff) {
+	public BuffTimer(ArrayList<Friend> timerFriends, Objective objective) {
 		this.timerFriends = timerFriends;
-		this.name = name;
-		this.timeLeft = timeLeft;
-		this.isBuff = isBuff;
+		this.name = objective.name;
+		this.timeLeft = objective.timeLeft;
+		this.isBuff = objective.isBuff;
 		spawnStrings();
 	}
 	
