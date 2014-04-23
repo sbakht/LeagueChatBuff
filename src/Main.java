@@ -40,41 +40,27 @@ public class Main {
 					System.out.println("[All]>" + friend.getName() + ": " + message);
 					
 	            	if(message.equals("ob")) { //our blue
-	            		for(Friend f : timerFriends) {
-//		            		f.sendMessage("Our Blue Buff Killed");
-	            		}
 	            		Timer timer = new Timer();
 	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BLUE", 300), 0, 60*1000);
 	            	}
 					
 	            	if(message.equals("or")) { //our red
-	            		for(Friend f : timerFriends) {
-//		            		f.sendMessage("Our Blue Buff Killed");
-	            		}
 	            		Timer timer = new Timer();
 	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"RED", 300), 0, 60*1000);
             		}
 	            	if(message.equals("tb")) { //their blue
-//	            		saad.sendMessage("Their Blue Buff Killed");
-//	            		vishal.sendMessage("Their Blue Buff Killed");
 	            		Timer timer = new Timer();
 	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMEY BLUE", 300), 0, 60*1000);
 	            	}
 	            	if(message.equals("tr")) { //their red
-//	            		saad.sendMessage("Their Red Buff Killed");
-//	            		vishal.sendMessage("Their Red Buff Killed");
 	            		Timer timer = new Timer();
 	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMY RED", 300), 0, 60*1000);
 	            	}
 	            	if(message.equals("drag")) { //dragon
-//	            		saad.sendMessage("Dragon Killed");
-//	            		vishal.sendMessage("Dragon Killed");
 	            		Timer timer = new Timer();
 	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"DRAGON", 360), 0, 60*1000);
 	            	}
-	            	if(message.equals("baron")) { //our red
-//	            		saad.sendMessage("Baron Killed");
-//	            		vishal.sendMessage("Baron Killed");
+	            	if(message.equals("baron")) { //baron
 	            		Timer timer = new Timer();
 	            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420), 0, 60*1000);
 	            	}
