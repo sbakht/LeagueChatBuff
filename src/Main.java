@@ -55,10 +55,17 @@ public class Main {
 					
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
-					
+
 					Timer timer = new Timer();
 					if(objectives.containsKey(message)){
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+						if(message.equals("ob")) {
+							friend.obTimer().cancel();
+							friend.createTimer();
+							friend.obTimer().scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 5*1000);
+//							friend.obTimer().cancel();
+						}else{
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+						}
 					}
 					
 					

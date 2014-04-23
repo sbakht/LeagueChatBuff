@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Saad/Desktop/lolchat-api-r1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Saad/Desktop/lolchat-api-r1.jar" sourcepath="C:/Users/Saad/Downloads/League-of-Legends-XMPP-Chat-Library-r1.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
