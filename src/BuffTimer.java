@@ -8,11 +8,26 @@ public class BuffTimer extends TimerTask {
 	private ArrayList<Friend> timerFriends;
 	private String name;
 	private int timeLeft;
+	private String willSpawn;
+	private String spawned;
+	private Boolean isBuff;
 	
-	public BuffTimer(ArrayList<Friend> timerFriends, String name, int timeLeft) {
+	public BuffTimer(ArrayList<Friend> timerFriends, String name, int timeLeft, Boolean isBuff) {
 		this.timerFriends = timerFriends;
 		this.name = name;
 		this.timeLeft = timeLeft;
+		this.isBuff = isBuff;
+		spawnStrings();
+	}
+	
+	public void spawnStrings() {
+		if(isBuff) {
+			willSpawn = " spawn ";
+			spawned = " has spawned";
+		}else{
+			willSpawn = " back in ";
+			spawned = " is up";
+		}
 	}
 	
 	@Override
@@ -20,17 +35,13 @@ public class BuffTimer extends TimerTask {
 		// TODO Auto-generated method stub
 		if(timeLeft <= 0) {
 			for(Friend f : timerFriends) {
-				if(name.contains("flash") || name.contains("ignite") || name.contains("exhaust") || name.contains("heal") || name.contains("ghost") ) {
-					f.sendMessage(name + " is up");
-				}else{
-					f.sendMessage(name + " has spawned");
-				}
+					f.sendMessage(name + spawned);
 			}
 			this.cancel();
 			return;
 		}
 		for(Friend f : timerFriends) {
-			f.sendMessage(name + " spawn " + timeLeft/60 +  " minutes");
+			f.sendMessage(name + willSpawn + timeLeft/60 +  " minutes");
 		}
 		timeLeft -= 60;
 	}

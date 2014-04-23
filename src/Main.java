@@ -43,35 +43,35 @@ public class Main {
 					switch (message) {
 
 						case "ob":
-		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BLUE", 300), 0, 60*1000);
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BLUE", 300,true), 0, 60*1000);
 							break;
 						case "or":
-		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"RED", 300), 0, 60*1000);
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"RED", 300,true), 0, 60*1000);
 							break;
 						case "tb":
-		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMEY BLUE", 300), 0, 60*1000);
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMEY BLUE", 300,true), 0, 60*1000);
 							break;
 						case "tr":
-		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMY RED", 300), 0, 60*1000);
+		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMY RED", 300,true), 0, 60*1000);
 							break;
 						case "drag":
-							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"DRAGON", 360), 0, 60*1000);
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"DRAGON", 360,true), 0, 60*1000);
 							break;
 						case "baron":
-							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420), 0, 60*1000);
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420,true), 0, 60*1000);
 							break;
 					}
 					
-					if(message.contains("flash")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 300), 0, 60*1000);
+					if(message.toLowerCase().contains("flash")) {
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 300,false), 0, 60*1000);
 					}
 					
-					if(message.contains("ignite") || message.contains("exhaust") || message.contains("ghost")) { //Not full minute - needs fixing
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 210), 0, 60*1000);
+					if(message.toLowerCase().contains("ignite") || message.contains("exhaust") || message.contains("ghost")) {
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 210,false), 0, 60*1000);
 					}
 					
-					if(message.contains("heal")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 240), 0, 60*1000);
+					if(message.toLowerCase().contains("heal")) {
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 240,false), 0, 60*1000);
 					}
 					
 					if(message.equals("disconnect")) {
