@@ -58,8 +58,6 @@ public class Main {
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
 					
-//					System.out.println(groupList.toString());
-					
 					Timer timer = new Timer();
 					if(objectives.containsKey(message)){
 						switch (message) {
@@ -115,12 +113,16 @@ public class Main {
 					
 					if(message.contains("group")) {
 						ArrayList<Friend> groupFriends;
+						
 						if(groupList.get(message) != null) {
 							groupFriends = groupList.get(message);
 						}else{
 							groupFriends = new ArrayList<Friend>();
 						}
-						groupFriends.add(friend);
+						
+						if(!groupFriends.contains(friend)) {
+							groupFriends.add(friend);
+						}
 						groupList.put(message, groupFriends);
 						friend.sendMessage("Group Members:");
 						for(Friend f : groupFriends) {
