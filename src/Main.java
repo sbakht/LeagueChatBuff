@@ -13,6 +13,8 @@ public class Main {
 	static private boolean discon;
 	static private Hashtable<String, Objective> objectives = new Hashtable<String, Objective>();
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
+	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();
+//	static private ArrayList<Friend> friendsList = new ArrayList<Friend>();
 	
 	public static void setUpObjectives(){
 		objectives.put("ob", new Objective("Blue", 300, true));
@@ -55,7 +57,9 @@ public class Main {
 					
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
-
+					
+//					System.out.println(groupList.toString());
+					
 					Timer timer = new Timer();
 					if(objectives.containsKey(message)){
 						switch (message) {
@@ -107,6 +111,21 @@ public class Main {
 					
 					if(message.toLowerCase().contains("heal")) {
 						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false)), 0, 60*1000);
+					}
+					
+					if(message.contains("group")) {
+						ArrayList<Friend> groupFriends;
+						if(groupList.get(message) != null) {
+							groupFriends = groupList.get(message);
+						}else{
+							groupFriends = new ArrayList<Friend>();
+						}
+						groupFriends.add(friend);
+						groupList.put(message, groupFriends);
+						friend.sendMessage("Group Members:");
+						for(Friend f : groupFriends) {
+							friend.sendMessage(f.getName());
+						}
 					}
 //					
 //					switch (message) {
