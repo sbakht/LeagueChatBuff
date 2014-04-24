@@ -57,21 +57,24 @@ public class Friend extends Wrapper<RosterEntry> {
 		return timers.get("or");
 	}
 	
-	public void resetOB() {
-		timers.get("ob").cancel();
-		timers.put("ob",new Timer());
-	}
-	
-	public void resetOR() {
-//		orTimer.cancel();
-//		orTimer = new Timer();
-		timers.get("or").cancel();
-		timers.put("or",new Timer());
+	public Timer getTimer(String buff) {
+		return timers.get(buff);
 	}
 	
 	public void resetTimer(String buff) {
+		System.out.println(buff);
 		timers.get(buff).cancel();
-		timers.put(buff,new Timer());
+		timers.put((String) buff, new Timer());
+//		switch (buff) {
+//		case "ob":
+//			timers.get("ob").cancel();
+//			timers.put("ob",new Timer());
+//			break;
+//		case "or":
+//			timers.get("or").cancel();
+//			timers.put("or",new Timer());
+//			break;
+//	}
 	}
 	
 	/**

@@ -60,10 +60,10 @@ public class Main {
 					if(objectives.containsKey(message)){
 						if(message.equals("ob")) {
 							friend.resetTimer("ob");
-							friend.obTimer().scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+							friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
 						}else if(message.equals("or")){
 							friend.resetTimer("or");
-							friend.orTimer().scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+							friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
 						}else{
 //							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 						}
