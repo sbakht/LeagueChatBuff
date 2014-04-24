@@ -19,7 +19,7 @@ public class Main {
 		objectives.put("or", new Objective("Red", 300, true));
 		objectives.put("tb", new Objective("Enemy Blue", 300, true));
 		objectives.put("tr", new Objective("Enemy Red", 300, true));
-		objectives.put("drag", new Objective("Blue", 360, true));
+		objectives.put("drag", new Objective("Dragon", 360, true));
 		objectives.put("baron", new Objective("Baron", 420, true));
 		summonerSpells.put("exhaust", 210);
 		summonerSpells.put("flash", 300);
@@ -74,6 +74,14 @@ public class Main {
 							case "tr":
 								friend.resetTimer("tr");
 								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								break;
+							case "drag":
+								friend.resetTimer("drag");
+								friend.getTimer("drag").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								break;
+							case "baron":
+								friend.resetTimer("baron");
+								friend.getTimer("baron").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
 								break;
 								
 						}
