@@ -61,27 +61,27 @@ public class Main {
 						switch (message) {
 							case "ob":
 								friend.resetTimer("ob");
-								friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "or":
 								friend.resetTimer("or");
-								friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "tb":
 								friend.resetTimer("tb");
-								friend.getTimer("tb").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								friend.getTimer("tb").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "tr":
 								friend.resetTimer("tr");
-								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "drag":
 								friend.resetTimer("drag");
-								friend.getTimer("drag").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								friend.getTimer("drag").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "baron":
 								friend.resetTimer("baron");
-								friend.getTimer("baron").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								friend.getTimer("baron").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 								
 						}

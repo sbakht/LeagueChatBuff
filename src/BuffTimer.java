@@ -42,9 +42,9 @@ public class BuffTimer extends TimerTask {
 			return;
 		}
 		for(Friend f : timerFriends) {
-			f.sendMessage(name + willSpawn + timeLeft/60.0 +  " minutes");
+			f.sendMessage(name + willSpawn + timeLeft/60 +  " minutes");
 		}
-		timeLeft -= 5;
+		timeLeft -= 60;
 	}
 	
 }
