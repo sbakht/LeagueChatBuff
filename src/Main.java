@@ -58,15 +58,34 @@ public class Main {
 
 					Timer timer = new Timer();
 					if(objectives.containsKey(message)){
-						if(message.equals("ob")) {
-							friend.resetTimer("ob");
-							friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
-						}else if(message.equals("or")){
-							friend.resetTimer("or");
-							friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
-						}else{
-//							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+						switch (message) {
+							case "ob":
+								friend.resetTimer("ob");
+								friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								break;
+							case "or":
+								friend.resetTimer("or");
+								friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								break;
+							case "tb":
+								friend.resetTimer("tb");
+								friend.getTimer("tb").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								break;
+							case "tr":
+								friend.resetTimer("tr");
+								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+								break;
+								
 						}
+//						if(message.equals("ob")) {
+////							friend.resetTimer("ob");
+////							friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+//						}else if(message.equals("or")){
+//							friend.resetTimer("or");
+//							friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
+//						}else{
+////							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//						}
 					}
 					
 					
