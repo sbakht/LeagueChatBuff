@@ -141,33 +141,18 @@ public class Main {
 					
 					if(message.equals("leave group")) {
 						ArrayList<Friend> groupFriends;
-						//String group;
 						
 						if(usersInAGroup.containsKey(friend)) {
 							String group = usersInAGroup.get(friend);
 							
-							if(groupList.get(group) != null) {
-								groupFriends = groupList.get(group);
-								if(groupFriends.contains(friend)) {
-									groupFriends.remove(friend);
-									groupList.put(group, groupFriends);
-									usersInAGroup.remove(friend);
-									friend.sendMessage("You have been removed from the group");
-								}
-								
-								friend.sendMessage("Current Group Members:");
-								for(Friend f : groupFriends) {
-									friend.sendMessage(f.getName());
-								}
-							}else{
-								friend.sendMessage("Tell Saad if you see this mesage - This means something went horribly wrong with the code");
-							}
+							groupFriends = groupList.get(group);
+							groupFriends.remove(friend);
+							groupList.put(group, groupFriends);
+							usersInAGroup.remove(friend);
+							friend.sendMessage("You have been removed from the group");
 						}else{
 							friend.sendMessage("You never were in a group");
-						}
-						
-
-						
+						}	
 					}
 //					
 //					switch (message) {
