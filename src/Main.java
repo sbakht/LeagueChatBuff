@@ -14,7 +14,7 @@ public class Main {
 	static private Hashtable<String, Objective> objectives = new Hashtable<String, Objective>();
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
 	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();
-	static private ArrayList<Friend> usersInAGroup = new ArrayList<Friend>();
+	static private Hashtable<Friend, String> usersInAGroup = new Hashtable<Friend, String>();
 	
 	public static void setUpObjectives(){
 		objectives.put("ob", new Objective("Blue", 300, true));
@@ -42,11 +42,11 @@ public class Main {
 		        e.printStackTrace();
 		    }
 		    
-			final Friend saad = api.getFriendByName("iwanthotdogs");
-			final Friend vishal = api.getFriendByName("sealiest seal");
-			final ArrayList<Friend> timerFriends = new ArrayList<>();
-			timerFriends.add(saad);
-			timerFriends.add(vishal);
+//			final Friend saad = api.getFriendByName("iwanthotdogs");
+//			final Friend vishal = api.getFriendByName("sealiest seal");
+//			final ArrayList<Friend> timerFriends = new ArrayList<>();
+//			timerFriends.add(saad);
+//			timerFriends.add(vishal);
 		    
 
 		    api.addChatListener(new ChatListener() {
@@ -55,6 +55,16 @@ public class Main {
 					
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
+					
+					ArrayList<Friend> timerFriends = new ArrayList<Friend>();	
+					
+					if(usersInAGroup.containsKey(friend)) {
+						String groupName = usersInAGroup.get(friend);
+						timerFriends = groupList.get(groupName);
+					}else{
+						timerFriends.add(friend); //sends message to themselves if not in a group
+					}
+
 					
 					Timer timer = new Timer();
 					if(objectives.containsKey(message)){
@@ -118,9 +128,9 @@ public class Main {
 							groupFriends = new ArrayList<Friend>();
 						}
 						
-						if(!usersInAGroup.contains(friend)) {
+						if(!usersInAGroup.containsKey(friend)) {
 							groupFriends.add(friend);
-							usersInAGroup.add(friend);
+							usersInAGroup.put(friend,message);
 						}
 						groupList.put(message, groupFriends);
 						friend.sendMessage("Group Members:");
