@@ -14,7 +14,7 @@ public class Main {
 	static private Hashtable<String, Objective> objectives = new Hashtable<String, Objective>();
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
 	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();
-//	static private ArrayList<Friend> friendsList = new ArrayList<Friend>();
+	static private ArrayList<Friend> usersInAGroup = new ArrayList<Friend>();
 	
 	public static void setUpObjectives(){
 		objectives.put("ob", new Objective("Blue", 300, true));
@@ -48,8 +48,6 @@ public class Main {
 			timerFriends.add(saad);
 			timerFriends.add(vishal);
 		    
-		    
-		    //Example 2: Adding ChatListener - listens to chat messages from any of your friends.
 
 		    api.addChatListener(new ChatListener() {
 				
@@ -120,8 +118,9 @@ public class Main {
 							groupFriends = new ArrayList<Friend>();
 						}
 						
-						if(!groupFriends.contains(friend)) {
+						if(!usersInAGroup.contains(friend)) {
 							groupFriends.add(friend);
+							usersInAGroup.add(friend);
 						}
 						groupList.put(message, groupFriends);
 						friend.sendMessage("Group Members:");
