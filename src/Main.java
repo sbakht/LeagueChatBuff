@@ -2,6 +2,8 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Timer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.github.theholywaffle.lolchatapi.ChatServer;
 import com.github.theholywaffle.lolchatapi.LolChat;
@@ -143,10 +145,22 @@ public class Main {
 						}	
 					}
 					
-					if(message.startsWith("custom")) { //Ex: custom shen ult 200
+					//Ex: custom shen ult 200
+					//EX: custom shen ult 20% 200
+					//Can have it account for cooldowns if you know enemy cooldown
+					if(message.startsWith("custom")) { 
 						String timeStr = message.substring(message.lastIndexOf(" ")+1);
 						if(isNumeric(timeStr)) {
 							int time = Integer.parseInt(timeStr);
+							
+							Pattern p = Pattern.compile("[0-9]+%");
+							Matcher m = p.matcher(message);
+
+							if (m.find()) {
+								double percentage = Integer.parseInt(m.group(0).substring(0, m.group(0).length() - 1)) / 100.0;
+							    time-= time * percentage;
+							}
+							
 							int extraTime = time % 60; //Fixes issue with fraction of minute timers not timing correctly
 							time-= extraTime;
 							message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
