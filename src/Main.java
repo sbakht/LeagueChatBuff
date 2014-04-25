@@ -10,7 +10,6 @@ import com.github.theholywaffle.lolchatapi.wrapper.Friend;
 
 public class Main {
 	
-	static private boolean discon;
 	static private Hashtable<String, Objective> objectives = new Hashtable<String, Objective>();
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
 	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();

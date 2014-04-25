@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
@@ -42,7 +43,8 @@ public class BuffTimer extends TimerTask {
 			return;
 		}
 		for(Friend f : timerFriends) {
-			f.sendMessage(name + willSpawn + timeLeft/60 +  " minutes");
+		    DecimalFormat decimalFormat=new DecimalFormat("#.#");
+			f.sendMessage(name + willSpawn + decimalFormat.format(timeLeft/60.0) +  " minutes");
 		}
 		timeLeft -= 60;
 	}
