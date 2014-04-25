@@ -46,13 +46,6 @@ public class Main {
 		    } catch (InterruptedException e) {
 		        e.printStackTrace();
 		    }
-		    
-//			final Friend saad = api.getFriendByName("iwanthotdogs");
-//			final Friend vishal = api.getFriendByName("sealiest seal");
-//			final ArrayList<Friend> timerFriends = new ArrayList<>();
-//			timerFriends.add(saad);
-//			timerFriends.add(vishal);
-		    
 
 		    api.addChatListener(new ChatListener() {
 				
@@ -100,15 +93,6 @@ public class Main {
 								break;
 								
 						}
-//						if(message.equals("ob")) {
-////							friend.resetTimer("ob");
-////							friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
-//						}else if(message.equals("or")){
-//							friend.resetTimer("or");
-//							friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 2*1000);
-//						}else{
-////							timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
-//						}
 					}
 					
 					
@@ -124,7 +108,7 @@ public class Main {
 						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false)), 0, 60*1000);
 					}
 					
-					if(message.startsWith("group")) {//Ex: group The_Best_Group
+					if(message.startsWith("group")) { //Ex: group The_Best_Group
 						ArrayList<Friend> groupFriends;
 						
 						if(groupList.get(message) != null) {
@@ -170,46 +154,6 @@ public class Main {
 						}
 					}
 					
-//					
-//					switch (message) {
-//
-//						case "ob":
-//		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BLUE", 300,true), 0, 60*1000);
-//							break;
-//						case "or":
-//		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"RED", 300,true), 0, 60*1000);
-//							break;
-//						case "tb":
-//		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMEY BLUE", 300,true), 0, 60*1000);
-//							break;
-//						case "tr":
-//		            		timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"ENEMY RED", 300,true), 0, 60*1000);
-//							break;
-//						case "drag":
-//							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"DRAGON", 360,true), 0, 60*1000);
-//							break;
-//						case "baron":
-//							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,"BARON", 420,true), 0, 60*1000);
-//							break;
-//					}
-					
-//					if(message.toLowerCase().contains("flash")) {
-//						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 300,false), 0, 60*1000);
-//					}
-//					
-//					if(message.toLowerCase().contains("ignite") || message.contains("exhaust") || message.contains("ghost")) {
-//						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 210,false), 0, 60*1000);
-//					}
-//					
-//					if(message.toLowerCase().contains("heal")) {
-//						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,message, 240,false), 0, 60*1000);
-//					}
-					
-					if(message.equals("disconnect")) {
-						discon = true;
-					}
-//					System.out.println(discon);
-
 				}
 			});
 		  
