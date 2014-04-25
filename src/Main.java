@@ -143,12 +143,13 @@ public class Main {
 						}	
 					}
 					
-					if(message.startsWith("custom")) { //Ex: custom shen ult 180
+					if(message.startsWith("custom")) { //Ex: custom shen ult 200
 						String timeStr = message.substring(message.lastIndexOf(" ")+1);
 						if(isNumeric(timeStr)) {
 							int time = Integer.parseInt(timeStr);
-							int extraTime = time % 60;
+							int extraTime = time % 60; //Fixes issue with fraction of minute timers not timing correctly
 							time-= extraTime;
+							message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
 							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false)), extraTime*1000, 60*1000);
 						}else{
 							friend.sendMessage("Your message needs to end with a valid number");
