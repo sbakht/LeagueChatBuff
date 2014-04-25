@@ -28,6 +28,11 @@ public class Main {
 		summonerSpells.put("heal", 240);
 	}
 	
+	public static boolean isNumeric(String str)
+	{
+	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+	}
+	
 	public static void main(String args[]) {
 		
 		setUpObjectives();
@@ -154,6 +159,12 @@ public class Main {
 							friend.sendMessage("You never were in a group");
 						}	
 					}
+					
+					if(message.startsWith("custom")) {
+						String time = message.substring(message.lastIndexOf(" ")+1);
+						System.out.println(isNumeric(time));
+					}
+					
 //					
 //					switch (message) {
 //
@@ -192,7 +203,7 @@ public class Main {
 					if(message.equals("disconnect")) {
 						discon = true;
 					}
-					System.out.println(discon);
+//					System.out.println(discon);
 
 				}
 			});
