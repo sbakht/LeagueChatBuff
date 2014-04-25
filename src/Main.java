@@ -124,7 +124,7 @@ public class Main {
 						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false)), 0, 60*1000);
 					}
 					
-					if(message.startsWith("group")) {
+					if(message.startsWith("group")) {//Ex: group The_Best_Group
 						ArrayList<Friend> groupFriends;
 						
 						if(groupList.get(message) != null) {
@@ -144,7 +144,7 @@ public class Main {
 						}
 					}
 					
-					if(message.equals("leave group")) {
+					if(message.equals("leave group")) { //Ex: leave group
 						ArrayList<Friend> groupFriends;
 						
 						if(usersInAGroup.containsKey(friend)) {
@@ -160,9 +160,14 @@ public class Main {
 						}	
 					}
 					
-					if(message.startsWith("custom")) {
-						String time = message.substring(message.lastIndexOf(" ")+1);
-						System.out.println(isNumeric(time));
+					if(message.startsWith("custom")) { //Ex: custom shen ult 180
+						String timeStr = message.substring(message.lastIndexOf(" ")+1);
+						if(isNumeric(timeStr)) {
+							int time = Integer.parseInt(timeStr);
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false)), 0, 60*1000);
+						}else{
+							friend.sendMessage("Your message needs to end with a valid number");
+						}
 					}
 					
 //					
