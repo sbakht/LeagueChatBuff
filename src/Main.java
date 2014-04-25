@@ -1,9 +1,19 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Timer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import com.github.theholywaffle.lolchatapi.ChatServer;
 import com.github.theholywaffle.lolchatapi.LolChat;
@@ -34,13 +44,33 @@ public class Main {
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}
 	
-	public static void main(String args[]) {
+	static class Action implements ActionListener {
 		
+		private JTextField username;
+		private JPasswordField password;
+		
+		public Action(JTextField username, JPasswordField password) {
+			// TODO Auto-generated constructor stub
+			this.username = username;
+			this.password = password;
+		}
+		
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			System.out.println(username.getText());
+			System.out.println(password.getText());
+			BuffBot(username.getText(), password.getText());
+			JOptionPane.showMessageDialog(null, "Login Successful");	
+		}
+		
+	}
+	
+	public static void BuffBot(String username, String password) {
 		setUpObjectives();
 
 		LolChat api = new LolChat(ChatServer.NA, true);
 		
-		if (api.login("sealsmurf1", "sealsmurf2")) {
+		if (api.login(username, password)) {
 
 		    try {
 		        Thread.sleep(1000); // Give server some time to send us all the data
@@ -176,6 +206,33 @@ public class Main {
 //		    api.disconnect();
 		    
 		}
+	}
+	
+	
+	
+	public static void main(String args[]) {
+		
+		JFrame frame = new JFrame("Test");
+		frame.setVisible(true);
+		frame.setSize(400,400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel label = new JLabel("hello");
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		panel.add(label);
+		
+		JTextField username = new JTextField(20);
+		JPasswordField password = new JPasswordField(20);
+		panel.add(username);
+		panel.add(password);
+		
+		JButton button = new JButton("my button");
+		panel.add(button);
+		button.addActionListener(new Action(username, password));
+
+		
+		
 	}
 
 }
