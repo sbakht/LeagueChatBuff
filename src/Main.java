@@ -147,7 +147,9 @@ public class Main {
 						String timeStr = message.substring(message.lastIndexOf(" ")+1);
 						if(isNumeric(timeStr)) {
 							int time = Integer.parseInt(timeStr);
-							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false)), 0, 60*1000);
+							int extraTime = time % 60;
+							time-= extraTime;
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false)), extraTime*1000, 60*1000);
 						}else{
 							friend.sendMessage("Your message needs to end with a valid number");
 						}
