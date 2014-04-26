@@ -212,22 +212,24 @@ public class Main {
 	
 	public static void main(String args[]) {
 		
-		JFrame frame = new JFrame("Test");
+		JFrame frame = new JFrame("League Chat Buff");
 		frame.setVisible(true);
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel label = new JLabel("hello");
 		JPanel panel = new JPanel();
 		frame.add(panel);
-		panel.add(label);
 		
+		JLabel labelUsrname = new JLabel("Username");
+		JLabel labelPassword = new JLabel("Password");
 		JTextField username = new JTextField(20);
 		JPasswordField password = new JPasswordField(20);
+		panel.add(labelUsrname);
 		panel.add(username);
+		panel.add(labelPassword);
 		panel.add(password);
 		
-		JButton button = new JButton("my button");
+		JButton button = new JButton("Login");
 		panel.add(button);
 		button.addActionListener(new Action(username, password));
 
