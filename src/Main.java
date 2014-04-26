@@ -1,4 +1,5 @@
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ public class Main {
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
 	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();
 	static private Hashtable<Friend, String> usersInAGroup = new Hashtable<Friend, String>();
+	
+	static LolChat api;
+	static JButton logButton;
 	
 	public static void setUpObjectives(){
 		objectives.put("ob", new Objective("Blue", 300, true));
@@ -57,10 +61,13 @@ public class Main {
 		
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			System.out.println(username.getText());
-			System.out.println(password.getText());
-			BuffBot(username.getText(), password.getText());
-			JOptionPane.showMessageDialog(null, "Login Successful");	
+			if(logButton.getText().equals("Login")) {
+				BuffBot(username.getText(), password.getText());
+			}else{
+				api.disconnect();
+				JOptionPane.showMessageDialog(null, "Logout Successful");
+			}
+
 		}
 		
 	}
@@ -68,16 +75,19 @@ public class Main {
 	public static void BuffBot(String username, String password) {
 		setUpObjectives();
 
-		LolChat api = new LolChat(ChatServer.NA, true);
+		api = new LolChat(ChatServer.NA, true);
 		
 		if (api.login(username, password)) {
-
+			
 		    try {
 		        Thread.sleep(1000); // Give server some time to send us all the data
 		    } catch (InterruptedException e) {
 		        e.printStackTrace();
 		    }
-
+		    
+			JOptionPane.showMessageDialog(null, "Login Successful");	
+			logButton.setText("Logout");
+			
 		    api.addChatListener(new ChatListener() {
 				
 				public void onMessage(Friend friend, String message) {
@@ -205,6 +215,8 @@ public class Main {
 		  
 //		    api.disconnect();
 		    
+		}else{
+			JOptionPane.showMessageDialog(null, "Login Failed");
 		}
 	}
 	
@@ -213,26 +225,28 @@ public class Main {
 	public static void main(String args[]) {
 		
 		JFrame frame = new JFrame("League Chat Buff");
-		frame.setVisible(true);
 		frame.setSize(400,400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
+		JPanel panel = new JPanel(new GridLayout(3, 1)); //3 rows on gui
 		frame.add(panel);
-		
-		JLabel labelUsrname = new JLabel("Username");
+
+		JLabel labelUsername = new JLabel("Username");
 		JLabel labelPassword = new JLabel("Password");
+		JLabel emptyLabel = new JLabel();
 		JTextField username = new JTextField(20);
 		JPasswordField password = new JPasswordField(20);
-		panel.add(labelUsrname);
+		panel.add(labelUsername);
 		panel.add(username);
 		panel.add(labelPassword);
 		panel.add(password);
-		
-		JButton button = new JButton("Login");
-		panel.add(button);
-		button.addActionListener(new Action(username, password));
+		panel.add(emptyLabel);
+		logButton = new JButton("Login");
+		panel.add(logButton);
+		logButton.addActionListener(new Action(username, password));
 
+        frame.pack();
+        frame.setVisible(true);
 		
 		
 	}
