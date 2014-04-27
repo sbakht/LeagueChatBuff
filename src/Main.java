@@ -109,30 +109,47 @@ public class Main {
 					if(objectives.containsKey(message)){
 						switch (message) {
 							case "ob":
+								for(Friend f : timerFriends) {
+									f.cancelTimer("ob");
+								}
 								friend.resetTimer("ob");
 								friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "or":
+								for(Friend f : timerFriends) {
+									f.cancelTimer("or");
+								}
 								friend.resetTimer("or");
 								friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "tb":
+								for(Friend f : timerFriends) {
+									f.cancelTimer("tb");
+								}
 								friend.resetTimer("tb");
 								friend.getTimer("tb").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "tr":
+								for(Friend f : timerFriends) {
+									f.cancelTimer("tr");
+								}
 								friend.resetTimer("tr");
 								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "drag":
+								for(Friend f : timerFriends) {
+									f.cancelTimer("drag");
+								}
 								friend.resetTimer("drag");
 								friend.getTimer("drag").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "baron":
+								for(Friend f : timerFriends) {
+									f.cancelTimer("baron");
+								}
 								friend.resetTimer("baron");
 								friend.getTimer("baron").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
-								break;
-								
+								break;	
 						}
 					}
 					
