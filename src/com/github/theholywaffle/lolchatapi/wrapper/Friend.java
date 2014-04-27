@@ -47,6 +47,7 @@ public class Friend extends Wrapper<RosterEntry> {
 		timers.put("tr", new Timer());
 		timers.put("drag", new Timer());
 		timers.put("baron", new Timer());
+		timers.put("minimap", new Timer());
 	}
 
 	public Timer obTimer() {
@@ -65,16 +66,10 @@ public class Friend extends Wrapper<RosterEntry> {
 		System.out.println(buff);
 		timers.get(buff).cancel();
 		timers.put((String) buff, new Timer());
-//		switch (buff) {
-//		case "ob":
-//			timers.get("ob").cancel();
-//			timers.put("ob",new Timer());
-//			break;
-//		case "or":
-//			timers.get("or").cancel();
-//			timers.put("or",new Timer());
-//			break;
-//	}
+	}
+	
+	public void cancelTimer(String buff) {
+		timers.get(buff).cancel();
 	}
 	
 	/**

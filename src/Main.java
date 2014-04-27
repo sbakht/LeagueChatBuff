@@ -210,7 +210,7 @@ public class Main {
 						}
 					}
 					
-					if(message.equals("minimap on")) {
+					if(message.startsWith("minimap on")) {
 						String timeStr = message.substring(message.lastIndexOf(" ")+1);
 						if(isNumeric(timeStr)) {
 							int time = Integer.parseInt(timeStr);
@@ -219,6 +219,10 @@ public class Main {
 						}else{
 							friend.sendMessage("Your message needs to end with a valid number");
 						}
+					}
+					
+					if(message.equals("minimap off")) {
+						friend.cancelTimer("minimap");;
 					}
 					
 				}
