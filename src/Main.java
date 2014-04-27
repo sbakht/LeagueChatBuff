@@ -210,6 +210,17 @@ public class Main {
 						}
 					}
 					
+					if(message.equals("minimap on")) {
+						String timeStr = message.substring(message.lastIndexOf(" ")+1);
+						if(isNumeric(timeStr)) {
+							int time = Integer.parseInt(timeStr);
+							message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
+							timer.scheduleAtFixedRate(new MinimapTimer(friend), 0, time*1000);
+						}else{
+							friend.sendMessage("Your message needs to end with a valid number");
+						}
+					}
+					
 				}
 			});
 		  
