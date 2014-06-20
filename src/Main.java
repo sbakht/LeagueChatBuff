@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Timer;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +26,7 @@ import com.github.theholywaffle.lolchatapi.listeners.ChatListener;
 import com.github.theholywaffle.lolchatapi.wrapper.Friend;
 
 public class Main {
-	
+
 	static private Hashtable<String, Objective> objectives = new Hashtable<String, Objective>();
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
 	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();
@@ -91,7 +95,7 @@ public class Main {
 		    api.addChatListener(new ChatListener() {
 				
 				public void onMessage(Friend friend, String message) {
-					
+					ScheduledFuture<?> sf = null;
 					message = (String) message.trim();
 					System.out.println("[All]>" + friend.getName() + ": " + message);
 					
@@ -105,69 +109,72 @@ public class Main {
 					}
 
 					
-					Timer timer = new Timer();
+					ScheduledExecutorService timer = Executors.newScheduledThreadPool(5);
 					if(objectives.containsKey(message)){
+						//Cases are unnecessary, they were only for canceling existing timers
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message), sf), 0, 60, TimeUnit.SECONDS);
 						switch (message) {
 							case "ob":
-								for(Friend f : timerFriends) {
-									f.cancelTimer("ob");
-								}
-								friend.resetTimer("ob");
-								friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								for(Friend f : timerFriends) {
+//									f.cancelTimer("ob");
+//								}
+//								friend.resetTimer("ob");
+//								friend.getTimer("ob").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000, TimeUnit.SECONDS);
 								break;
 							case "or":
-								for(Friend f : timerFriends) {
-									f.cancelTimer("or");
-								}
-								friend.resetTimer("or");
-								friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								for(Friend f : timerFriends) {
+//									f.cancelTimer("or");
+//								}
+//								friend.resetTimer("or");
+//								friend.getTimer("or").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "tb":
-								for(Friend f : timerFriends) {
-									f.cancelTimer("tb");
-								}
-								friend.resetTimer("tb");
-								friend.getTimer("tb").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								for(Friend f : timerFriends) {
+//									f.cancelTimer("tb");
+//								}
+//								friend.resetTimer("tb");
+//								friend.getTimer("tb").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "tr":
-								for(Friend f : timerFriends) {
-									f.cancelTimer("tr");
-								}
-								friend.resetTimer("tr");
-								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								for(Friend f : timerFriends) {
+//									f.cancelTimer("tr");
+//								}
+//								friend.resetTimer("tr");
+//								friend.getTimer("tr").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "drag":
-								for(Friend f : timerFriends) {
-									f.cancelTimer("drag");
-								}
-								friend.resetTimer("drag");
-								friend.getTimer("drag").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								for(Friend f : timerFriends) {
+//									f.cancelTimer("drag");
+//								}
+//								friend.resetTimer("drag");
+//								friend.getTimer("drag").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;
 							case "baron":
-								for(Friend f : timerFriends) {
-									f.cancelTimer("baron");
-								}
-								friend.resetTimer("baron");
-								friend.getTimer("baron").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
+//								for(Friend f : timerFriends) {
+//									f.cancelTimer("baron");
+//								}
+//								friend.resetTimer("baron");
+//								friend.getTimer("baron").scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message)), 0, 60*1000);
 								break;	
 						}
 					}
 					
 					
 					if(message.toLowerCase().contains("flash")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("flash"),false)), 0, 60*1000);
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("flash"),false),sf), 0, 60, TimeUnit.SECONDS);
 					}
 					
 					if(message.toLowerCase().contains("ignite") || message.contains("exhaust") || message.contains("ghost")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, summonerSpells.get("exhaust"),false)), 0, 60*1000);
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, summonerSpells.get("exhaust"),false),sf), 0, 60, TimeUnit.SECONDS);
 					}
 					
 					if(message.toLowerCase().contains("heal")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false)), 0, 60*1000);
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false),sf), 0, 60, TimeUnit.SECONDS);
 					}
 					
 					if(message.toLowerCase().contains("ward")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, 300,false)), 0, 60*1000);
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, 300,false),sf), 0, 60, TimeUnit.SECONDS);
 					}
 					
 					if(message.startsWith("group")) { //Ex: group The_Best_Group
@@ -225,7 +232,7 @@ public class Main {
 							int extraTime = time % 60; //Fixes issue with fraction of minute timers not timing correctly
 							time-= extraTime;
 							message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
-							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false)), extraTime*1000, 60*1000);
+							timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false),sf), extraTime, 60, TimeUnit.SECONDS);
 						}else{
 							friend.sendMessage("Your message needs to end with a valid number");
 						}
@@ -236,14 +243,14 @@ public class Main {
 						if(isNumeric(timeStr)) {
 							int time = Integer.parseInt(timeStr);
 							message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
-							timer.scheduleAtFixedRate(new MinimapTimer(friend), 0, time*1000);
+							timer.scheduleAtFixedRate(new MinimapTimer(friend), 0, time, TimeUnit.SECONDS);
 						}else{
 							friend.sendMessage("Your message needs to end with a valid number");
 						}
 					}
 					
 					if(message.equals("minimap off")) {
-						friend.cancelTimer("minimap");;
+//						friend.cancelTimer("minimap");;
 					}
 					
 				}
@@ -257,8 +264,23 @@ public class Main {
 	}
 	
 	
-	
 	public static void main(String args[]) {
+		
+//		ScheduledExecutorService timer =
+//		        Executors.newScheduledThreadPool(1);
+//		ScheduledFuture<?> sf = null;
+//		sf = timer.scheduleAtFixedRate(new Kappa(sf), 0, 1, TimeUnit.SECONDS);
+//		scheduledExecutorService.scheduleAtFixedRate(new Kappa(), 0, 2, TimeUnit.SECONDS);
+		
+//		scheduledExecutorService.scheduleAtFixedRate(new Kappa(), 0, 1, TimeUnit.SECONDS);
+//		ScheduledFuture bob = ScheduledFuture();
+//		ScheduledFuture<?> scheduledFuture =
+//			    timer.scheduleAtFixedRate(new Kappa(), 0, 1, TimeUnit.SECONDS);
+//		scheduledFuture.
+//		scheduledFuture1.cancel(true);
+//		scheduledFuture.sh
+//		scheduledExecutorService.shutdown();
+//		scheduledExecutorService.shutdownNow();
 		
 		JFrame frame = new JFrame("League Chat Buff");
 		frame.setSize(400,400);

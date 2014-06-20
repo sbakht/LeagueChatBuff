@@ -13,6 +13,9 @@ package com.github.theholywaffle.lolchatapi.wrapper;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 
 import org.jdom2.JDOMException;
 import org.jivesoftware.smack.Chat;
@@ -34,43 +37,45 @@ public class Friend extends Wrapper<RosterEntry> {
 	private Friend instance = null;
 	private Chat chat = null;
 	private ChatListener listener = null;
-	private Hashtable<String, Timer> timers = new Hashtable<String, Timer>();
-	private Timer obTimer = new Timer();
-	private Timer orTimer = new Timer();
+	private Hashtable<String, ScheduledFuture> timers = new Hashtable<String, ScheduledFuture>();
+//	private Timer obTimer = new Timer();
+//	private Timer orTimer = new Timer();
+	ScheduledExecutorService obTimer = Executors.newScheduledThreadPool(5);
+	ScheduledExecutorService orTimer = Executors.newScheduledThreadPool(5);
 	
 	public Friend(LolChat api, XMPPConnection connection, RosterEntry entry) {
 		super(api, connection, entry);
 		this.instance = this;
-		timers.put("ob", new Timer());
-		timers.put("or", new Timer());
-		timers.put("tb", new Timer());
-		timers.put("tr", new Timer());
-		timers.put("drag", new Timer());
-		timers.put("baron", new Timer());
-		timers.put("minimap", new Timer());
+//		timers.put("ob", new ScheduledFuture());
+//		timers.put("or", new Timer());
+//		timers.put("tb", new Timer());
+//		timers.put("tr", new Timer());
+//		timers.put("drag", new Timer());
+//		timers.put("baron", new Timer());
+//		timers.put("minimap", new Timer());
 	}
 
-	public Timer obTimer() {
-		return timers.get("ob");
-	}
-	
-	public Timer orTimer() {
-		return timers.get("or");
-	}
-	
-	public Timer getTimer(String buff) {
-		return timers.get(buff);
-	}
-	
-	public void resetTimer(String buff) {
-		System.out.println(buff);
-		timers.get(buff).cancel();
-		timers.put((String) buff, new Timer());
-	}
-	
-	public void cancelTimer(String buff) {
-		timers.get(buff).cancel();
-	}
+//	public Timer obTimer() {
+//		return timers.get("ob");
+//	}
+//	
+//	public Timer orTimer() {
+//		return timers.get("or");
+//	}
+//	
+//	public Timer getTimer(String buff) {
+//		return timers.get(buff);
+//	}
+//	
+//	public void resetTimer(String buff) {
+//		System.out.println(buff);
+//		timers.get(buff).cancel();
+//		timers.put((String) buff, new Timer());
+//	}
+//	
+//	public void cancelTimer(String buff) {
+//		timers.get(buff).cancel();
+//	}
 	
 	/**
 	 * Deletes this friend.
