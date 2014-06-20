@@ -166,6 +166,10 @@ public class Main {
 						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false)), 0, 60*1000);
 					}
 					
+					if(message.toLowerCase().contains("ward")) {
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, 300,false)), 0, 60*1000);
+					}
+					
 					if(message.startsWith("group")) { //Ex: group The_Best_Group
 						ArrayList<Friend> groupFriends;
 						
