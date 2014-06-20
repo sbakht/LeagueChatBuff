@@ -174,7 +174,7 @@ public class Main {
 					}
 					
 					if(message.toLowerCase().contains("ward")) {
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, 300,false),sf), 0, 60, TimeUnit.SECONDS);
+						timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, 180,false),sf), 0, 60, TimeUnit.SECONDS);
 					}
 					
 					if(message.startsWith("group")) { //Ex: group The_Best_Group
