@@ -2,6 +2,7 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.github.theholywaffle.lolchatapi.ChatServer;
 import com.github.theholywaffle.lolchatapi.LolChat;
 
 public class Main {
@@ -37,6 +39,7 @@ public class Main {
 			// TODO Auto-generated method stub
 			BuffBot buffBot = new BuffBot();
 			if(logButton.getText().equals("Login")) {
+				api = new LolChat(ChatServer.NA, true);
 				buffBot.login(username.getText(), password.getText(), api);
 				logButton.setText("Logout");
 			}else{

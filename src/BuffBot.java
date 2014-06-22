@@ -53,8 +53,6 @@ public class BuffBot {
 	
 	public void ChatBuffBot(String username, String password, LolChat api) {
 		setUpObjectives();
-
-		api = new LolChat(ChatServer.NA, true);
 			
 		    try {
 		        Thread.sleep(1000); // Give server some time to send us all the data
