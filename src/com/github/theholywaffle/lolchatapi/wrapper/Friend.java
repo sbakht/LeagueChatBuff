@@ -11,12 +11,8 @@
 package com.github.theholywaffle.lolchatapi.wrapper;
 
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-
 import org.jdom2.JDOMException;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
@@ -37,7 +33,7 @@ public class Friend extends Wrapper<RosterEntry> {
 	private Friend instance = null;
 	private Chat chat = null;
 	private ChatListener listener = null;
-	private Hashtable<String, ScheduledFuture> timers = new Hashtable<String, ScheduledFuture>();
+//	private Hashtable<String, ScheduledFuture> timers = new Hashtable<String, ScheduledFuture>();
 //	private Timer obTimer = new Timer();
 //	private Timer orTimer = new Timer();
 	ScheduledExecutorService obTimer = Executors.newScheduledThreadPool(5);

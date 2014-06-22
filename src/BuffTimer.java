@@ -1,6 +1,5 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.TimerTask;
 import java.util.concurrent.ScheduledFuture;
 
 import com.github.theholywaffle.lolchatapi.wrapper.Friend;
