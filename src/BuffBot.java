@@ -20,8 +20,6 @@ public class BuffBot {
 	static private Hashtable<String, Integer> summonerSpells = new Hashtable<String, Integer>();
 	static private Hashtable<String, ArrayList<Friend>> groupList = new Hashtable<String, ArrayList<Friend>>();
 	static private Hashtable<Friend, String> usersInAGroup = new Hashtable<Friend, String>();
-	
-	private final int NOTIFICATION_INTERVAL = 60;
 
 	public static void setUpObjectives(){
 		objectives.put("ob", new Objective("Blue", 300, true));
@@ -33,6 +31,7 @@ public class BuffBot {
 		summonerSpells.put("exhaust", 210);
 		summonerSpells.put("flash", 300);
 		summonerSpells.put("heal", 240);
+		summonerSpells.put("ward", 180); //not a summoner spell but whatever
 	}
 
 	public static boolean isNumeric(String str)
@@ -70,29 +69,26 @@ public class BuffBot {
 
 				//Depreciated - Kept for minimap to keep working
 				ScheduledExecutorService miniMapTimer= Executors.newScheduledThreadPool(1);
-				
+
+				int cooldown = 0;
+
 				MyTimer timer = new MyTimer();
 				if(objectives.containsKey(message)){
 					timer.createTimer(new BuffTimer(timerFriends, objectives.get(message), sf));
+				}else if(message.toLowerCase().contains("flash")) {
+					cooldown = summonerSpells.get("flash");
+				}else if(message.toLowerCase().contains("ignite") || message.contains("exhaust") || message.contains("ghost")) {
+					cooldown = summonerSpells.get("exhaust");
+				}else if(message.toLowerCase().contains("heal")) {
+					cooldown = summonerSpells.get("heal");
+				}else if(message.toLowerCase().contains("ward")) {
+					cooldown = summonerSpells.get("ward");
 				}
 
-
-				if(message.toLowerCase().contains("flash")) {
-					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("flash"),false),sf));
+				if(cooldown != 0) {
+					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, cooldown,false),sf));
 				}
-
-				if(message.toLowerCase().contains("ignite") || message.contains("exhaust") || message.contains("ghost")) {
-					timer.createTimer(new BuffTimer(timerFriends,new Objective(message, summonerSpells.get("exhaust"),false),sf));
-				}
-
-				if(message.toLowerCase().contains("heal")) {
-					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false),sf));
-				}
-
-				if(message.toLowerCase().contains("ward")) {
-					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, 180,false),sf));
-				}
-
+				
 				if(message.startsWith("group")) { //Ex: group The_Best_Group
 					ArrayList<Friend> groupFriends;
 
