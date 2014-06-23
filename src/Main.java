@@ -40,8 +40,13 @@ public class Main {
 			BuffBot buffBot = new BuffBot();
 			if(logButton.getText().equals("Login")) {
 				api = new LolChat(ChatServer.NA, true);
-				buffBot.login(username.getText(), password.getText(), api);
-				logButton.setText("Logout");
+				Boolean loggedIn = buffBot.login(username.getText(), password.getText(), api);
+				if(loggedIn) {
+					logButton.setText("Logout");
+					buffBot.ChatBuffBot(username.getText(), password.getText(), api);
+				}else{
+					JOptionPane.showMessageDialog(null, "Login Failed");
+				}
 			}else{
 				api.disconnect();
 				JOptionPane.showMessageDialog(null, "Logout Successful");
