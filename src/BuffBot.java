@@ -68,27 +68,29 @@ public class BuffBot {
 					timerFriends.add(friend); //sends message to themselves if not in a group
 				}
 
-
-				ScheduledExecutorService timer = Executors.newScheduledThreadPool(5);
+				//Depreciated - Kept for minimap to keep working
+				ScheduledExecutorService miniMapTimer= Executors.newScheduledThreadPool(1);
+				
+				MyTimer timer = new MyTimer();
 				if(objectives.containsKey(message)){
-					timer.scheduleAtFixedRate(new BuffTimer(timerFriends, objectives.get(message), sf), 0, NOTIFICATION_INTERVAL, TimeUnit.SECONDS);
+					timer.createTimer(new BuffTimer(timerFriends, objectives.get(message), sf));
 				}
 
 
 				if(message.toLowerCase().contains("flash")) {
-					timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("flash"),false),sf), 0, NOTIFICATION_INTERVAL, TimeUnit.SECONDS);
+					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("flash"),false),sf));
 				}
 
 				if(message.toLowerCase().contains("ignite") || message.contains("exhaust") || message.contains("ghost")) {
-					timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, summonerSpells.get("exhaust"),false),sf), 0, NOTIFICATION_INTERVAL, TimeUnit.SECONDS);
+					timer.createTimer(new BuffTimer(timerFriends,new Objective(message, summonerSpells.get("exhaust"),false),sf));
 				}
 
 				if(message.toLowerCase().contains("heal")) {
-					timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false),sf), 0, NOTIFICATION_INTERVAL, TimeUnit.SECONDS);
+					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, summonerSpells.get("heal"),false),sf));
 				}
 
 				if(message.toLowerCase().contains("ward")) {
-					timer.scheduleAtFixedRate(new BuffTimer(timerFriends, new Objective(message, 180,false),sf), 0, NOTIFICATION_INTERVAL, TimeUnit.SECONDS);
+					timer.createTimer(new BuffTimer(timerFriends, new Objective(message, 180,false),sf));
 				}
 
 				if(message.startsWith("group")) { //Ex: group The_Best_Group
@@ -146,7 +148,7 @@ public class BuffBot {
 						int extraTime = time % 60; //Fixes issue with fraction of minute timers not timing correctly
 						time-= extraTime;
 						message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
-						timer.scheduleAtFixedRate(new BuffTimer(timerFriends,new Objective(message, time, false),sf), extraTime, NOTIFICATION_INTERVAL, TimeUnit.SECONDS);
+						timer.createTimer(new BuffTimer(timerFriends,new Objective(message, time, false),sf), extraTime);
 					}else{
 						friend.sendMessage("Your message needs to end with a valid number");
 					}
@@ -157,7 +159,7 @@ public class BuffBot {
 					if(isNumeric(timeStr)) {
 						int time = Integer.parseInt(timeStr);
 						message = message.substring(message.indexOf(" ")+1,message.lastIndexOf(" "));
-						timer.scheduleAtFixedRate(new MinimapTimer(friend), 0, time, TimeUnit.SECONDS);
+						miniMapTimer.scheduleAtFixedRate(new MinimapTimer(friend), 0, time, TimeUnit.SECONDS);
 					}else{
 						friend.sendMessage("Your message needs to end with a valid number");
 					}
