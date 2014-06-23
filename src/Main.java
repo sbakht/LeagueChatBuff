@@ -49,6 +49,7 @@ public class Main {
 				}
 			}else{
 				api.disconnect();
+				logButton.setText("Login");
 				JOptionPane.showMessageDialog(null, "Logout Successful");
 			}
 
