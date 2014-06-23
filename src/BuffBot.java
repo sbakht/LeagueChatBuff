@@ -41,7 +41,9 @@ public class BuffBot {
 	
 	public boolean login(String username, String password, LolChat api) {
 	    try {
-	    	api.login(username, password);
+	    	if(!api.login(username, password)) {
+	    		return false;
+	    	}
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return false;
