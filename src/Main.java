@@ -40,8 +40,9 @@ public class Main {
 			BuffBot buffBot = new BuffBot();
 			if(logButton.getText().equals("Login")) {
 				api = new LolChat(ChatServer.NA, true);
-				Boolean loggedIn = buffBot.login(username.getText(), password.getText(), api);
-				if(loggedIn) {
+				Account account = new Account();
+				account.login(username.getText(), password.getText(), api);
+				if(account.isLoggedIn()) {
 					logButton.setText("Logout");
 					buffBot.ChatBuffBot(username.getText(), password.getText(), api);
 				}else{

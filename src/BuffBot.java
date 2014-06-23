@@ -39,18 +39,6 @@ public class BuffBot {
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}
 	
-	public boolean login(String username, String password, LolChat api) {
-	    try {
-	    	if(!api.login(username, password)) {
-	    		return false;
-	    	}
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return false;
-	    }
-    	return true;
-		
-	}
 	
 	public void ChatBuffBot(String username, String password, LolChat api) {
 		setUpObjectives();
